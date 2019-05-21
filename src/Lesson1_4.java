@@ -8,7 +8,7 @@ public class Lesson1_4 {
         int enter;
         Scanner scanner = new Scanner(System.in);
         System.out.println(guess);
-        System.out.print("Please enter number: ");
+        System.out.print("Please enter numberkk: ");
         enter = scanner.nextInt();
 
         do {
