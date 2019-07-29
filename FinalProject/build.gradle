@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'FinalProject'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile("org.assertj:assertj-core:3.11.1")
+    compileOnly "org.projectlombok:lombok:1.16.16"
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.+'
+}
