@@ -8,7 +8,7 @@ public class HomePage extends Common {
     private By bannerFrame = By.xpath("//iframe[contains(@id,'mt-')]");
     private By secondBannerClose = By.xpath("//div[@id='cookie-btns']/a[@class='c-button-inverse']");
 
-    public void CloseBanner(){
+    public void closeBanner(){
         checkPageIsReady();
 
         if (driver.findElements(bannerFrame).size()!=0) {

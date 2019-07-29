@@ -19,13 +19,19 @@ public class Common {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(chromeOptions);
         driver.get("https://www.1a.lv");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         jse = (JavascriptExecutor)driver;
 
     }
+
+    public void stopBrowser(){
+        waitSomeSeconds();
+        driver.quit();
+    }
+
     public void checkPageIsReady() {
 
         //Initially bellow given if condition will check ready state of page.
@@ -34,7 +40,13 @@ public class Common {
             return; }
     }
 
-    public void stopBrowser(){
-        driver.quit();
+    public void waitSomeSeconds(){
+        try{
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }

@@ -1,8 +1,7 @@
 package onealv;
 
 import onealv.helpers.Common;
-import onealv.models.Customer;
-import onealv.models.Product;
+import onealv.helpers.SetUp;
 import onealv.pages.CartPage;
 import onealv.pages.HomePage;
 import onealv.pages.OrderPage;
@@ -12,33 +11,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_1aLv {
+public class Test_1aLv extends SetUp {
 
     private HomePage homePage = new HomePage();
     private SearchPage searchPage = new SearchPage();
     private OrderPage orderPage = new OrderPage();
     private CartPage cartPage = new CartPage();
     private Common common = new Common();
-
-    Product product;
-    Customer customer;
+    private SetUp setup = new SetUp();
 
     @Before
+    public void setUpData(){
+        setup.setUpProduct();
+        setup.setUpCustomer();
 
-    public void setUpProduct(){
-        product = new Product();
-        product.setProductName("Blenderi");
-        product.setProductBrand("Bosch");
-    }
-    @Before
-    public void setUpCustomer(){
-
-        customer = new Customer();
-        customer.setFirstName("Svetlana");
-        customer.setLastName("Karpik");
-        customer.seteMail("sveta@gmail.com");
-        customer.setPhoneNumber("23456456");
-        customer.setReceiveNews("Uz e-pastu");
     }
 
     @Test
@@ -51,27 +37,27 @@ public class Test_1aLv {
 
     @After
     public void CloseBrowser(){
-        orderPage.stopBrowser();
+        common.stopBrowser();
     }
 
         private void openBrowser () {
             homePage.startBrowser();
-            homePage.CloseBanner();
+            homePage.closeBanner();
         }
 
         private void searchProduct () {
-            searchPage.closeBanner();
-            searchPage.SearchProduct(product.getProductName());
+            searchPage.searchProduct(setup.product.getProductName());
+            homePage.closeBanner();
             searchPage.setRatio();
-            searchPage.SearchBrand(product.getProductBrand());
+            searchPage.searchBrand(setup.product.getProductBrand());
             searchPage.selectProduct();
         }
 
         private void orderProduct () {
-            cartPage.NavigateToCart();
-            orderPage.addCustomerName(customer.getFirstName(), customer.getLastName());
-            orderPage.addCustomerContacts(customer.geteMail(), customer.getPhoneNumber());
-            orderPage.addCustomerAddInfo(customer.getReceiveNews());
+            cartPage.navigateToCart();
+            orderPage.addCustomerName(setup.customer.getFirstName(), setup.customer.getLastName());
+            orderPage.addCustomerContacts(setup.customer.geteMail(), setup.customer.getPhoneNumber());
+            orderPage.addCustomerAddInfo(setup.customer.getReceiveNews());
             orderPage.selectDelivery();
             orderPage.selectPaymentType();
             orderPage.getProductData();

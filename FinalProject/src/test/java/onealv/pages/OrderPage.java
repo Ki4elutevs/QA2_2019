@@ -55,11 +55,4 @@ public class OrderPage extends Common {
         productName = driver.findElement(productNameInOrder).getText();
         prodcutPrice = driver.findElement(productPriceInOrder).getText();
     }
-
-    public void stopBrowser(){
-        driver.quit();
-    }
-
-
-
 }

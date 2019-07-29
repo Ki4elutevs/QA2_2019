@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 
 public class SearchPage extends Common {
 
-    private By bannerFrame = By.xpath("//iframe[contains(@id,'mt-')]");
     private By searchField = By.id("search_products_text_field");
     private By searchButton = By.xpath("//input[@value='search']");
     private By titleName = By.xpath("//div[@data-attribute-id='2100']");
@@ -24,44 +23,36 @@ public class SearchPage extends Common {
 
     private WebElement ratioList;
 
-    public void closeBanner(){
-        if (driver.findElements(bannerFrame).size()!=0) {
-            driver.switchTo().frame(driver.findElement(bannerFrame));
-            driver.findElement(By.xpath("//*[name() = 'use']")).click();
-        }
-    }
-    public void SearchProduct (String searchedProduct) {
+    public void searchProduct (String searchedProduct) {
         checkPageIsReady();
-        if (driver.findElements(bannerFrame).size()!=0) {
-            driver.switchTo().frame(driver.findElement(bannerFrame));
-            driver.findElement(By.xpath("//*[name() = 'use']")).click();
-        }
         driver.findElement(searchField).sendKeys(searchedProduct);
         driver.findElement(searchButton).click();
     }
 
     public void setRatio(){
-        driver.findElement(ratio).click();
-        ratioList = driver.findElement(ratioSelectList);
-        ratioList.sendKeys(Keys.DOWN);
-        driver.findElement(ratio).click();
-        ratioList.sendKeys(Keys.DOWN);
+        for(int i=0; i<=1; i++) {
+            driver.findElement(ratio).click();
+            ratioList = driver.findElement(ratioSelectList);
+            ratioList.sendKeys(Keys.DOWN);
+            waitSomeSeconds();
+        }
     }
 
-    public void SearchBrand(String productBrand){
+    public void searchBrand(String productBrand){
         checkPageIsReady();
-
         if (driver.findElements(By.xpath("//a[@data-cat-id = '155']")).size() != 0 ) {
             driver.findElement(productCategory).click();
         }
         jse.executeScript("arguments[0].scrollIntoView();", driver.findElement(titleName));
         driver.findElement(titleName).click();
-
         driver.findElement(searchBrand).sendKeys(productBrand);
         driver.findElement(foundBrand).click();
+        waitSomeSeconds();
     }
 
     public void selectProduct(){
+        jse.executeScript("arguments[0].scrollIntoView();", driver.findElement(addToCart));
+        waitSomeSeconds();
         driver.findElement(addToCart).click();
     }
 

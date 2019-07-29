@@ -18,7 +18,7 @@ public class CartPage extends Common {
     public String firstProductName;
 
 
-    public void NavigateToCart(){
+    public void navigateToCart(){
         driver.findElement(GoToCart).click();
         if (driver.findElements(productPriceInCart).size()==0)
         {
